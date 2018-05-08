@@ -5,9 +5,12 @@
 /dist-server
 /tmp
 /out-tsc
+*/app/**/*.js
+*/app/**/*.map
 
 # dependencies
 *node_modules
+*bower_components
 
 # IDEs and editors
 /.idea
