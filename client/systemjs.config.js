@@ -11,7 +11,7 @@
         // map tells the System loader where to look for things
         map: {
             // our app is within the app folder
-            app : 'app/',
+            app : 'app',
             // angular bundles
             '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
             '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
@@ -38,7 +38,7 @@
                 defaultExtension: 'js' 
             }, 
             'angular-in-memory-web-api:': {
-                main: '../routes/index.js',
+                main: '/routes/index.js',
                 defaultExtension: 'js'
             }
         }
