@@ -1,0 +1,38 @@
+{
+  "name": "contactmanager",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
+    "lite": "lite-server",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@angular/common": "^6.0.0",
+    "@angular/compiler": "^6.0.0",
+    "@angular/core": "^6.0.0",
+    "@angular/forms": "^6.0.0",
+    "@angular/http": "^6.0.0",
+    "@angular/platform-browser": "^6.0.0",
+    "@angular/platform-browser-dynamic": "^6.0.0",
+    "@angular/router": "^6.0.0",
+    "@angular/upgrade": "^6.0.0",
+    "angular-in-memory-web-api": "^0.6.0",
+    "bootstrap": "^3.3.7",
+    "core-js": "^2.4.1",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "^6.0.0",
+    "systemjs": "0.19.39",
+    "zone.js": "^0.8.26"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "lite-server": "^2.3.0",
+    "typescript": "^2.8.3",
+    "@types/node": "^10.0.4",
+    "@types/jasmine": "^2.8.7",
+    "@types/core-js": "^0.9.46"
+  }
+}
