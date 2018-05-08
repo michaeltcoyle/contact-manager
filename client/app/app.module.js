@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var platform_browser_1 = require("@angular/platform-browser");
+var platform_browser_1 = require("@angular/platform-browser/src/platform-browser");
 var core_1 = require("@angular/core/src/core");
 var app_component_1 = require("./app.component");
 var AppModule = /** @class */ (function () {

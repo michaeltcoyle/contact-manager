@@ -7,17 +7,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core/src/core");
-var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+var ContactsComponent = /** @class */ (function () {
+    function ContactsComponent() {
     }
-    AppComponent = __decorate([
+    ContactsComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'contact-manager',
-            templateUrl: 'app.component.html'
+            selector: 'contacts',
+            templateUrl: 'contacts.component.html'
         })
-    ], AppComponent);
-    return AppComponent;
+    ], ContactsComponent);
+    return ContactsComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.ContactsComponent = ContactsComponent;
+//# sourceMappingURL=contacts.component.js.map

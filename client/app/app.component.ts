@@ -1,8 +1,9 @@
 import { Component } from '@angular/core/src/core';
 
 @Component({
+    moduleId: module.id,
     selector: 'contact-manager',
-    template: '<h1>Contact List App</h1>'
+    templateUrl: 'app.component.html'
 })
 
 export class AppComponent { }
