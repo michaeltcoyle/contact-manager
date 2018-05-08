@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongojs = require('mongojs');
-
+var cors = require('cors');
 var fs = require('fs');
 var data = fs.readFileSync('routes/db_login.json', 'utf8');
 var dblogin = JSON.parse(data);
@@ -11,6 +11,7 @@ console.log(dblogin);
 var db = mongojs(dblogin.dblogin, ['contacts']);
 
 //get all contacts
+router.options('/contacts', cors());
 router.get('/contacts', function(req, res, next){
     db.contacts.find(function(err, contacts){
         if (err){
