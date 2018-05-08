@@ -1,7 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var mongojs = require('mongojs');
-var db = mongojs('mongodb://mcoyle:admin@ds259085.mlab.com:59085/contact_manager', ['contacts']);
+
+var fs = require('fs');
+var data = fs.readFileSync('routes/db_login.json', 'utf8');
+var dblogin = JSON.parse(data);
+
+console.log(dblogin);
+
+var db = mongojs(dblogin.dblogin, ['contacts']);
 
 //get all contacts
 router.get('/contacts', function(req, res, next){
