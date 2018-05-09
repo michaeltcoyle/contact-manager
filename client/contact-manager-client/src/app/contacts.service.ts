@@ -9,7 +9,7 @@ export class ContactsService {
     constructor(private http: HttpClient) {}
 
     apiUrl = 'http://localhost:3000/api/contacts';
-    getContacts(): Observable<any> {
+    getContacts(): any {
         return this.http.get(this.apiUrl);
     }
 }

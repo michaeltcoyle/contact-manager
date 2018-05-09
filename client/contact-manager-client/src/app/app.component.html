@@ -1,4 +1,27 @@
-<span *ngFor="let contact of contacts">
-  {{contact.firstName}} {{contact.lastName}}
-</span>
+
+  <div class="container">
+    <div class="row panel panel-primary">
+      <div class="panel-heading">
+        <h2 class="panel-title">Contacts Manager</h2>
+        <!--     contact list   	 -->
+        <div class="col-xs-5 panel-body">
+          <ul class="list-group">
+            <li class="list-group-item"> <h4>My Contacts:</h4>
+              <div>
+                  <ag-grid-angular 
+                  style="width: 1200px; height: 500px;" 
+                  class="ag-theme-balham"
+                  [enableSorting]="true"
+                  [enableFilter]="true"
+                  [rowData]="rowData"
+                  [columnDefs]="columnDefs"
+                  >
+              </ag-grid-angular>
+              </div>
+            </li>
+          </ul> 
+        </div>
+      </div>
+    </div>
+  </div>
 
