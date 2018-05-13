@@ -5,16 +5,19 @@ import { AppComponent } from './app.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { DialogComponent } from './dialog.component';
+import { DialogComponent, CreateContactDialogComponent } from './dialog.component';
 import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule, MatInputModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
     AppComponent,
     DialogComponent,
+    CreateContactDialogComponent
+  ],
+  entryComponents: [
+    CreateContactDialogComponent
   ],
   imports: [
     AgGridModule.withComponents([]),
@@ -24,9 +27,13 @@ import {MatCardModule} from '@angular/material/card';
     MatInputModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatCardModule
+    MatCardModule,
+    FormsModule,
+    MatDialogModule
   ],
-  providers: [ContactsService],
+  providers: [ContactsService, 
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+  ],
   bootstrap: [AppComponent, DialogComponent]
 })
 export class AppModule { }

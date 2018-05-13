@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {Component, Inject} from '@angular/core'
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { MatInputModule } from '@angular/material';
 
 @Component({
@@ -10,21 +10,39 @@ import { MatInputModule } from '@angular/material';
 
 
 export class DialogComponent {
-  @Input
-  ('okText') okText: string;
-  @Input
-  ('cancelText') cancelText: string;
-  @Input
-  ('valueEmitted') valueEmitted: any;
-
-  constructor() {
-    this.okText = 'OK';
-    this.cancelText = 'Cancel';
-   }
-   
-   emitValue(value) {
-    //this.valueEmitted.emit(value);
-   }
 
 
+  firstName: string;
+  lastName: string;
+
+  constructor(public dialog: MatDialog) {}
+
+  openDialog(): void {
+
+    let dialogRef = this.dialog.open(CreateContactDialogComponent, {
+
+      width: '400px',
+      data: { firstName: this.firstName, lastName: this.lastName }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.lastName = result;
+    });
+  }
 }
+  @Component({
+    selector: 'create-contact-dialog',
+    templateUrl: './dialog.component.CreateContactDialog.html',
+  })
+  export class CreateContactDialogComponent {
+  
+    constructor(
+      public dialogRef: MatDialogRef<CreateContactDialogComponent>,
+      @Inject(MAT_DIALOG_DATA) public data: any) { }
+  
+    onNoClick(): void {
+      this.dialogRef.close();
+    }
+  
+  }
