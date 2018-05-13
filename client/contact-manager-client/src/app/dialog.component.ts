@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material';
 })
 
 
-export class DialogComponent implements OnInit {
+export class DialogComponent {
   @Input
   ('okText') okText: string;
   @Input
@@ -23,10 +23,8 @@ export class DialogComponent implements OnInit {
    }
    
    emitValue(value) {
-    this.valueEmitted.emit(value);
+    //this.valueEmitted.emit(value);
    }
 
-  ngOnInit() {
-  }
 
 }

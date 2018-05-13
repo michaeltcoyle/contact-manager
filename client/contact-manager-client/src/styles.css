@@ -4,6 +4,5 @@
 @import "~ag-grid/dist/styles/ag-theme-balham.css";
 
 body {
-    padding: 2em 23em;
-    background:lightgray;
+    padding-bottom: 20px;
 }

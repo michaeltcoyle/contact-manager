@@ -8,6 +8,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DialogComponent } from './dialog.component';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,10 @@ import { MatInputModule } from '@angular/material';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatCardModule
   ],
   providers: [ContactsService],
   bootstrap: [AppComponent, DialogComponent]

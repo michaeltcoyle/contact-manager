@@ -1,29 +1,21 @@
 
-<html>
-    
-
-
-<header></header>
-        <body>
-       <div align="center">
-        <div class = "mat-middlenav-container" align="left">
-          <h4 align="center">My Contacts</h4>
-          <ag-grid-angular
-          style="width:800px; height:500px"
-          class="ag-theme-balham"
-          [enableSorting]="false"
-          [enableFilter]="false"
-          [rowData]="rowData"
-          [columnDefs]="columnDefs"
-          >
-          </ag-grid-angular>
-        </div>
-      </div>
-        <form><app-dialog></app-dialog></form>
-
-      </body>
-      </html>
-
+            <mat-card>
+          
+            <mat-card-title align="center">My Contacts</mat-card-title>
+            <mat-card-content item-width="800px" item-height="100%">
+                <ag-grid-angular
+                style="width: 700px; height: 500px; margin: auto"
+                class="ag-theme-balham"
+                [enableSorting]="false"
+                [enableFilter]="false"
+                [rowData]="rowData"
+                [columnDefs]="columnDefs"
+                >
+                </ag-grid-angular>
+        
+        </mat-card-content>
+      </mat-card>
+      <mat-card style="height:100%"><mat-card-footer align="center"><app-dialog align= "auto"></app-dialog></mat-card-footer></mat-card>
 
 
 

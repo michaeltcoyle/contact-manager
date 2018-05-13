@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Input, Component, OnInit, ElementRef, Injectable } from '@angular/core';
 import { ContactsService } from './contacts.service';
 import { Contact } from './contact.model';
+import { agRow } from './agRow.model';
 import { HttpClient } from '@angular/common/http';
 import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
 import { FormsModule } from '@angular/forms';
-import { GridApi } from 'ag-grid';
-import { EventListener } from '@angular/core/src/debug/debug_node';
+import { Observable, Subscription } from 'rxjs';
+import { map } from "rxjs/operators";
 
-//Declare custom type for table Rows
-type agRow = {name: string, phone: string, email: string};
 
 @Component({
   selector: 'app-root',
@@ -17,10 +16,10 @@ type agRow = {name: string, phone: string, email: string};
 })
 
 
-
+@Injectable()
 export class AppComponent implements OnInit {
 
-  [templateUrl: string]: any;
+
   //Create Table Headers
   title = 'app';
 
@@ -31,7 +30,7 @@ export class AppComponent implements OnInit {
   ];
 
   //Initialize Fields
-  contacts: Contact[] = new Array();
+  contacts: Contact[];
   rowData: agRow[];
 
   //Get Contact Data
@@ -40,6 +39,7 @@ export class AppComponent implements OnInit {
     this.contacts = data;
     this.rowData = this.populateRows(this.contacts);
     });
+    
   }
 
   //Populate Rows with Contacts
@@ -55,17 +55,13 @@ export class AppComponent implements OnInit {
     return this.rowData;
   }
 
+  //pass grid data
+  getGridData(): agRow[] {
+    return this.rowData;
+  }
+
   //Do on page initialization
   ngOnInit(){
-
-    console.log("pre");
-    document.addEventListener<"loadeddata">("loadeddata", ev => {
-      console.log("post");
-      var nlEle: any;
-      nlEle = document.getElementsByName("ag-grid-angular");
-      nlEle[0].style.width = ("fit-content");
-      nlEle[0].style.height = ("fit-content");
-    });
     
   }
 
