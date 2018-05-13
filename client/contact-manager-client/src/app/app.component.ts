@@ -3,7 +3,9 @@ import { ContactsService } from './contacts.service';
 import { Contact } from './contact.model';
 import { HttpClient } from '@angular/common/http';
 import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
-
+import { FormsModule } from '@angular/forms';
+import { GridApi } from 'ag-grid';
+import { EventListener } from '@angular/core/src/debug/debug_node';
 
 //Declare custom type for table Rows
 type agRow = {name: string, phone: string, email: string};
@@ -18,6 +20,7 @@ type agRow = {name: string, phone: string, email: string};
 
 export class AppComponent implements OnInit {
 
+  [templateUrl: string]: any;
   //Create Table Headers
   title = 'app';
 
@@ -26,12 +29,10 @@ export class AppComponent implements OnInit {
     {headerName: 'Phone', field: 'phone' },
     {headerName: 'Email', field: 'email' }
   ];
-  
 
   //Initialize Fields
-  rowData: agRow[];
   contacts: Contact[] = new Array();
-
+  rowData: agRow[];
 
   //Get Contact Data
   constructor(private contactsService: ContactsService) {
@@ -57,7 +58,17 @@ export class AppComponent implements OnInit {
   //Do on page initialization
   ngOnInit(){
 
+    console.log("pre");
+    document.addEventListener<"loadeddata">("loadeddata", ev => {
+      console.log("post");
+      var nlEle: any;
+      nlEle = document.getElementsByName("ag-grid-angular");
+      nlEle[0].style.width = ("fit-content");
+      nlEle[0].style.height = ("fit-content");
+    });
+    
   }
+
 }
   
 

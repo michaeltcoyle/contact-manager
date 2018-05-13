@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
 @import "~ag-grid/dist/styles/ag-grid.css";
 @import "~ag-grid/dist/styles/ag-theme-balham.css";
 
-.myGrid {
-    width: 500px;
-    height: 250px;
-  }
+body {
+    padding: 2em 23em;
+    background:lightgray;
+}

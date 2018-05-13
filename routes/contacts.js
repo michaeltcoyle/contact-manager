@@ -6,7 +6,8 @@ var fs = require('fs');
 var data = fs.readFileSync('routes/db_login.json', 'utf8');
 var dblogin = JSON.parse(data);
 
-console.log(dblogin);
+//debug: print dblogin token to console
+//console.log(dblogin);
 
 var db = mongojs(dblogin.dblogin, ['contacts']);
 
