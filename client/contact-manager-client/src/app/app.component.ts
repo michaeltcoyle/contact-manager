@@ -3,7 +3,6 @@ import { ContactsService } from './contacts.service';
 import { Contact } from './contact.model';
 import { agRow } from './agRow.model';
 import { HttpClient } from '@angular/common/http';
-import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
 import { FormsModule } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from "rxjs/operators";
@@ -16,7 +15,6 @@ import { map } from "rxjs/operators";
 })
 
 
-@Injectable()
 export class AppComponent implements OnInit {
 
 
@@ -30,14 +28,12 @@ export class AppComponent implements OnInit {
   ];
 
   //Initialize Fields
-  contacts: Contact[];
   rowData: agRow[];
 
   //Get Contact Data
   constructor(private contactsService: ContactsService) {
-    this.contactsService.getContacts().subscribe(data => {
-    this.contacts = data;
-    this.rowData = this.populateRows(this.contacts);
+    this.contactsService.currentContacts.subscribe(data => {
+    this.rowData = this.populateRows(data);
     });
     
   }
@@ -55,13 +51,6 @@ export class AppComponent implements OnInit {
     return this.rowData;
   }
 
-  //update rows
-  updateContacts(){
-    this.contactsService.getContacts().subscribe(data => {
-      this.contacts = data;
-      this.rowData = this.populateRows(this.contacts);
-    });
-  }
 
   //pass grid data
   getGridData(): agRow[] {

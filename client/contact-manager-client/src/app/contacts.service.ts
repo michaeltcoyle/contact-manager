@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpHandler, HttpResponse} from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { map } from "rxjs/operators";
-import {Contact} from "./contact.model";
+import { Contact } from "./contact.model";
 
 
 export class LocalContact implements Contact {
@@ -13,8 +13,13 @@ export class LocalContact implements Contact {
 
 @Injectable()
 export class ContactsService{
-
-    constructor(private http: HttpClient) {}
+    contacts = new BehaviorSubject<Contact[]>(new Array());
+    currentContacts = this.contacts.asObservable();
+    constructor(private http: HttpClient) {
+        this.http.get(this.apiUrl+'contacts').subscribe(data => {
+            this.contacts.next(data as Contact[]);
+        });
+    }
 
     httpOptions = {
         headers: new HttpHeaders({
@@ -24,12 +29,21 @@ export class ContactsService{
 
     apiUrl = 'http://localhost:3000/api/';
 
-    getContacts(): any {
-        return this.http.get(this.apiUrl+'contacts');
+    getContacts(): Observable<Contact[]> {
+        return this.currentContacts;
+    }
+
+    private updateContacts(): Observable<Contact[]> {
+        return this.http.get(this.apiUrl+'contacts') as Observable<Contact[]>;
     }
 
     saveContact(firstName: string, lastName: string, phone: string, email: string): any {
         var newContact = new LocalContact(firstName, lastName, phone, email);
-        return this.http.post(this.apiUrl+'contact', JSON.stringify(newContact), this.httpOptions);
+        this.http.post(this.apiUrl+'contact', JSON.stringify(newContact), this.httpOptions)
+        .subscribe(() => {
+            this.updateContacts().subscribe(data => {
+                this.contacts.next(data);
+            })
+        })
     }
 }

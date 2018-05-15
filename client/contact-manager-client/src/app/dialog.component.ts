@@ -1,3 +1,4 @@
+
 import {Component, Injectable, Inject} from '@angular/core'
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { HttpResponse } from '@angular/common/http'
@@ -52,8 +53,7 @@ export class DialogComponent {
       this.dialogRef.close();
     }
     saveContact(): void{
-      this.contactsService.saveContact(this.firstName, this.lastName, this.phone, this.email).subscribe();
-      //this.appComponent.updateContacts();
+      this.contactsService.saveContact(this.firstName, this.lastName, this.phone, this.email);
       this.dialogRef.close();
     }
   
