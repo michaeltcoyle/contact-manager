@@ -28,8 +28,8 @@ export class ContactsService{
         return this.http.get(this.apiUrl+'contacts');
     }
 
-    saveContact(): any {
-        //var newContact = new LocalContact("tes2131t", "nameLa1231st","456-123-4567", "yahooaol@gmail.com");
-        //return this.http.post(this.apiUrl+'contact', JSON.stringify(newContact), this.httpOptions);
+    saveContact(firstName: string, lastName: string, phone: string, email: string): any {
+        var newContact = new LocalContact(firstName, lastName, phone, email);
+        return this.http.post(this.apiUrl+'contact', JSON.stringify(newContact), this.httpOptions);
     }
 }

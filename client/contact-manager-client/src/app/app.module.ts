@@ -32,7 +32,7 @@ import {MatCardModule} from '@angular/material/card';
     MatDialogModule
   ],
   providers: [ContactsService, 
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {float: 'always'}}
   ],
   bootstrap: [AppComponent, DialogComponent]
 })
