@@ -1,11 +1,12 @@
 
+          <mat-card><mat-card style="width: 650px">
+            <mat-card-title align="center" style="font-size: 50px; font-weight: bolder; letter-spacing: 5px"><b>My Contacts</b></mat-card-title></mat-card></mat-card>
             <mat-card>
-          
-            <mat-card-title align="center">My Contacts</mat-card-title>
             <mat-card-content item-width="800px" item-height="100%">
                 <ag-grid-angular
                 style="width: 602px; height: 500px; margin: auto"
                 class="ag-theme-balham"
+                [suppressHorizontalScroll]="true"
                 [enableSorting]="false"
                 [enableFilter]="false"
                 [rowData]="rowData"
@@ -14,10 +15,10 @@
                 </ag-grid-angular>
         
         </mat-card-content>
+    </mat-card>
 
-
-        
-       <footer align="center"><app-dialog></app-dialog></footer> 
+        <mat-card>
+       <mat-card-title align="center"><app-dialog></app-dialog></mat-card-title></mat-card>
 
 
 
