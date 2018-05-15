@@ -35,10 +35,10 @@ router.get('/contact/:id', function(req, res, next){
 module.exports = router;
 
 //save contact
-
-router.post('/task', function(req, res, next){
+router.post('/contact', function(req, res, next){
+    console.log("here");
     var contact = req.body;
-    if (!contact.firstname || !contact.lastname){
+    if (!contact.firstName || !contact.lastName){
         res.status(400)
         res.json({
             "error": "Contact must have a name"
@@ -98,3 +98,4 @@ router.put('/contact/:id', function(req, res, next){
         });
     }
 });
+

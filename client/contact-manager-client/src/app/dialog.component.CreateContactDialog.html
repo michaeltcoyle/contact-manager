@@ -1,10 +1,23 @@
-    <mat-card style="width:auto; height:auto" color="primary">
-        <mat-form-field>
-        <input matInput [(ngModel)]="firstName" placeholder="First Name">
+    <mat-card style="width:500px; height:auto" color="primary" >
+        <mat-card-title style="width:500px">Add New Contact</mat-card-title>
+        <mat-form-field style="width:250px">
+        <input style="width: 210px" matInput [(ngModel)]="firstName" placeholder="First Name">
         </mat-form-field>
-        <mat-form-field>
-        <input matInput [(ngModel)]="lastName" placeholder="Last Name">
+        <mat-form-field style="width:250px">
+        <input style="width: 250px" matInput [(ngModel)]="lastName" placeholder="Last Name">
         </mat-form-field>
+        <mat-form-field style="width:250px">
+         <input style="width: 210px" matInput [(ngModel)]="phone" placeholder="Phone Number">
+        </mat-form-field>
+        <mat-form-field style="width:250px">
+         <input style="width: 250px" matInput [(ngModel)]="email" placeholder="Email Address">
+        </mat-form-field>
+        <mat-card-content style="width: 250px">
+        </mat-card-content>
+        <mat-card-content style="width: 250px">
+        <button style="margin-left: 15%; margin-right: 10%" color="primary" mat-raised-button (click)="cancel()">Cancel</button>
+        <button color="primary" mat-raised-button (click)="saveContact()">Save</button>
+        </mat-card-content>
     </mat-card>
 
 

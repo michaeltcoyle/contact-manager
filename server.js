@@ -16,8 +16,7 @@ app.use(function(req, res, next) {
   });
 
 //set static folder
-app.use(express.static(path.join(__dirname, 'client')));
-
+app.use(express.static(path.join(__dirname, 'client/contact-manager-client/src')));
 //body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

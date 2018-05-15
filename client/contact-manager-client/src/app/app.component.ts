@@ -55,6 +55,14 @@ export class AppComponent implements OnInit {
     return this.rowData;
   }
 
+  //update rows
+  updateContacts(){
+    this.contactsService.getContacts().subscribe(data => {
+      this.contacts = data;
+      this.rowData = this.populateRows(this.contacts);
+    });
+  }
+
   //pass grid data
   getGridData(): agRow[] {
     return this.rowData;
