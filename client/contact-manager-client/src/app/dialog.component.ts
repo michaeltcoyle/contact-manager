@@ -5,6 +5,7 @@ import { HttpResponse } from '@angular/common/http'
 import { MatInputModule } from '@angular/material';
 import {ContactsService} from './contacts.service';
 import {CreateContact} from './createcontact.dialog.component';
+import {RemoveContact} from './removecontact.dialog.component';
 
 
 @Component({
@@ -15,53 +16,22 @@ import {CreateContact} from './createcontact.dialog.component';
 
 
 export class DialogComponent {
-
-  dialogExists: boolean;
   
 
-  constructor(public dialog: MatDialog) { this.dialogExists = false;}
+  constructor(public dialog: MatDialog) {}
 
-  openDialog(): void {
-
-    if (this.dialogExists) { return; }
-
-    //Create Contact
-
+  createContact(): void {
+    this.dialog.closeAll(); 
     let dialogRef = this.dialog.open(CreateContact, {
       width: '600px'
     });
-    this.dialogExists = true;
-    dialogRef.afterClosed().subscribe(result => {
-      this.dialogExists = false;
+  }
+  removeContact(): void {
+    this.dialog.closeAll(); 
+    let dialogRef = this.dialog.open(RemoveContact, {
+      width: '600px'
     });
-
-    
   }
+
+
 }
-/*
-  @Component({
-    selector: 'create-contact-dialog',
-    templateUrl: './dialog.component.CreateContactDialog.html',
-  })
-  
-  export class CreateContactDialogComponent2 {
-
-    firstName: string;
-    lastName: string;
-    phone: string;
-    email: string;
-
-    constructor(
-      public dialogRef: MatDialogRef<CreateContactDialogComponent>, private contactsService: ContactsService) { }
-  
-    //cancel contact creation, do not save
-    cancel(): void {
-      this.dialogRef.close();
-    }
-    saveContact(): void{
-      this.contactsService.saveContact(this.firstName, this.lastName, this.phone, this.email);
-      this.dialogRef.close();
-    }
-  
-  }
-  */

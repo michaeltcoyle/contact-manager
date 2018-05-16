@@ -1,0 +1,22 @@
+
+        <div style="width: 1000px; max-height: 600px">
+        <mat-card-title >Remove Contact</mat-card-title>
+        <mat-card-title style="font-size: 20px">Search</mat-card-title>
+        <mat-form-field >
+        <input  matInput [(ngModel)]="firstName" placeholder="First Name">
+        </mat-form-field>
+        <mat-form-field>
+        <input matInput [(ngModel)]="lastName" placeholder="Last Name">
+        </mat-form-field>
+        <mat-selection-list>
+                <mat-list-item *ngFor="let contact of contacts">
+                <h4 mat-line style="padding-bottom: 0%; margin-top: 1%; margin-bottom: 0%; height: 10px; font-size: 10px"><span style="width:25%; height: 10px">{{contact.firstName}}</span><span style="width:25%; height: 10px">{{contact.lastName}}</span><span style="width:25%; height: 10px">{{contact.phone}}</span><span style="width:25%; height: 10px">{{contact.email}}</span></h4>
+                </mat-list-item>
+        </mat-selection-list>
+        <mat-card-content>
+        <button style="margin-left: 15%; margin-right: 10%" color="primary" mat-raised-button (click)="cancel()">Cancel</button>
+        <button color="primary" mat-raised-button (click)="removeContact()">Remove</button>
+        </mat-card-content>
+
+</div>
+

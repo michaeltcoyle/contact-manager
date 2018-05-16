@@ -10,15 +10,19 @@ import { FormsModule } from '@angular/forms';
 import {MatButtonModule, MatCheckboxModule, MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule, MatInputModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {CreateContact} from './createcontact.dialog.component'
+import {RemoveContact} from './removecontact.dialog.component'
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
     AppComponent,
     DialogComponent,
-    CreateContact
+    CreateContact,
+    RemoveContact
   ],
   entryComponents: [
-    CreateContact
+    CreateContact,
+    RemoveContact
   ],
   imports: [
     AgGridModule.withComponents([]),
@@ -30,7 +34,8 @@ import {CreateContact} from './createcontact.dialog.component'
     MatCheckboxModule,
     MatCardModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatListModule
   ],
   providers: [ContactsService, 
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {float: 'always'}}
