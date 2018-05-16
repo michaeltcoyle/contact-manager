@@ -36,7 +36,6 @@ module.exports = router;
 
 //save contact
 router.post('/contact', function(req, res, next){
-    console.log("here");
     var contact = req.body;
     if (!contact.firstName || !contact.lastName){
         res.status(400)

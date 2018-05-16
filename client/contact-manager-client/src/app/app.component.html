@@ -2,9 +2,11 @@
           <mat-card><mat-card style="width: 650px">
             <mat-card-title align="center" style="font-size: 50px; font-weight: bolder; letter-spacing: 5px"><b>My Contacts</b></mat-card-title></mat-card></mat-card>
             <mat-card>
-            <mat-card-content item-width="800px" item-height="100%">
+
+            <mat-card-content item-width="800px" item-height="100%" style="overflow:hidden">
                 <ag-grid-angular
-                style="width: 602px; height: 500px; margin: auto"
+
+                style="width: 100%; height: 500px"
                 class="ag-theme-balham"
                 [suppressHorizontalScroll]="true"
                 [enableSorting]="false"
@@ -15,6 +17,7 @@
                 </ag-grid-angular>
         
         </mat-card-content>
+
     </mat-card>
 
         <mat-card>

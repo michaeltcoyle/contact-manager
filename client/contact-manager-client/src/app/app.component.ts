@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from "rxjs/operators";
+import { Grid } from "ag-grid";
 
 
 @Component({
@@ -22,18 +23,38 @@ export class AppComponent implements OnInit {
   title = 'app';
 
   columnDefs = [
-    {headerName: 'Name', field: 'name' },
-    {headerName: 'Phone', field: 'phone' },
-    {headerName: 'Email', field: 'email' }
+    {headerName: 'Name', field: 'name', suppressMovable: true },
+    {headerName: 'Phone', field: 'phone', suppressMovable: true  },
+    {headerName: 'Email', field: 'email', suppressMovable: true  }
   ];
 
   //Initialize Fields
   rowData: agRow[];
+  myGrid: Grid;
+
+  // let the grid know which columns and what data to use
+  gridOptions = {
+    columnDefs: this.columnDefs,
+    rowData: this.rowData,
+
+  onGridReady: function (params) {
+      params.api.sizeColumnsToFit();
+
+    window.addEventListener('resize', function() {
+      setTimeout(function() {
+        params.api.sizeColumnsToFit();
+      })
+    })
+  }
+};
 
   //Get Contact Data
   constructor(private contactsService: ContactsService) {
     this.contactsService.currentContacts.subscribe(data => {
     this.rowData = this.populateRows(data);
+    /*var eGridDiv = document.querySelector<HTMLElement>('myGrid');
+    new Grid(eGridDiv, this.gridOptions);
+    this.gridOptions.onGridReady(api => {api.sizeColumnsToFit()});*/
     });
     
   }
@@ -59,7 +80,7 @@ export class AppComponent implements OnInit {
 
   //Do on page initialization
   ngOnInit(){
-    
+    /*this.gridOptions.onGridReady(this.columnDefs);*/
   }
 
 }
