@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse, HttpHandler, HttpResponse} 
 import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { map } from "rxjs/operators";
 import { Contact } from "./contact.model";
+import { Grid } from "ag-grid";
 
 
 export class LocalContact implements Contact {
@@ -15,6 +16,7 @@ export class LocalContact implements Contact {
 export class ContactsService{
     contacts = new BehaviorSubject<Contact[]>(new Array());
     currentContacts = this.contacts.asObservable();
+    myGrid: Grid;
     constructor(private http: HttpClient) {
         this.http.get(this.apiUrl+'contacts').subscribe(data => {
             this.contacts.next(data as Contact[]);

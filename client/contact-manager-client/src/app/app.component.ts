@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from "rxjs/operators";
-import { Grid } from "ag-grid";
+import { Grid, ColumnApi, GridApi, GridOptions} from "ag-grid";
 
 
 @Component({
@@ -16,71 +16,68 @@ import { Grid } from "ag-grid";
 })
 
 
-export class AppComponent implements OnInit {
-
-
-  //Create Table Headers
-  title = 'app';
-
-  columnDefs = [
-    {headerName: 'Name', field: 'name', suppressMovable: true },
-    {headerName: 'Phone', field: 'phone', suppressMovable: true  },
-    {headerName: 'Email', field: 'email', suppressMovable: true  }
-  ];
+export class AppComponent implements OnInit{
 
   //Initialize Fields
-  rowData: agRow[];
   myGrid: Grid;
+  selectedRow: agRow;
+  title = 'app';
+  //Create Table Headers
+
+  gridOptions: GridOptions;
 
   // let the grid know which columns and what data to use
-  gridOptions = {
-    columnDefs: this.columnDefs,
-    rowData: this.rowData,
 
-  onGridReady: function (params) {
-      params.api.sizeColumnsToFit();
-
-    window.addEventListener('resize', function() {
-      setTimeout(function() {
-        params.api.sizeColumnsToFit();
-      })
-    })
-  }
-};
-
+  public contacts: Contact[];
   //Get Contact Data
   constructor(private contactsService: ContactsService) {
-    this.contactsService.currentContacts.subscribe(data => {
-    this.rowData = this.populateRows(data);
-    /*var eGridDiv = document.querySelector<HTMLElement>('myGrid');
-    new Grid(eGridDiv, this.gridOptions);
-    this.gridOptions.onGridReady(api => {api.sizeColumnsToFit()});*/
-    });
+    this.contacts = new Array<Contact>();
     
+    this.contactsService.currentContacts.subscribe(data => {
+      this.contacts = data;
+    });
+    console.log(this.contacts);
+    this.gridOptions = <GridOptions>{
+      columnDefs: [
+        {headerName: 'Name', field: 'name', suppressMovable: true },
+        {headerName: 'Phone', field: 'phone', suppressMovable: true  },
+        {headerName: 'Email', field: 'email', suppressMovable: true  }
+      ],
+      rowHeight: 48,
+      rowData: this.populateRows(this.contacts),
+      onGridReady: () => {
+        console.log(this.gridOptions.rowData);
+      }
+    }
   }
 
   //Populate Rows with Contacts
   populateRows(data: Contact[]): agRow[] {
-    this.rowData = new Array<agRow>(data.length);
+    console.log(data);
+    var rowData = new Array<agRow>(data.length);
+    console.log(data.length);
     var index: number = 0;
     var namefl: string;
     for(let contact of data){
       namefl = contact.firstName.concat(" ").concat(contact.lastName);
-      this.rowData[index] = {name: namefl, phone: contact.phone, email: contact.email};
+      rowData[index] = {name: namefl, phone: contact.phone, email: contact.email};
       index = index+1;
+      console.log(rowData);
     }
-    return this.rowData;
+    console.log(rowData);
+    return rowData as agRow[];
   }
 
+  /*
+  updateRowSelection(CellClickedEvent) {
 
-  //pass grid data
-  getGridData(): agRow[] {
-    return this.rowData;
-  }
+  }*/
+
+  
 
   //Do on page initialization
   ngOnInit(){
-    /*this.gridOptions.onGridReady(this.columnDefs);*/
+
   }
 
 }
