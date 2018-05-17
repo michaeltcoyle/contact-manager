@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from "rxjs/operators";
-import { Grid, ColumnApi, GridApi, GridOptions} from "ag-grid";
+import { Grid, ColumnApi, GridApi, GridOptions, GridReadyEvent} from "ag-grid";
 
 
 @Component({
@@ -21,6 +21,7 @@ export class AppComponent implements OnInit{
   //Initialize Fields
   myGrid: Grid;
   selectedRow: agRow;
+  rowData: agRow[];
   title = 'app';
   //Create Table Headers
 
@@ -29,55 +30,55 @@ export class AppComponent implements OnInit{
   // let the grid know which columns and what data to use
 
   public contacts: Contact[];
-  //Get Contact Data
+
   constructor(private contactsService: ContactsService) {
-    this.contacts = new Array<Contact>();
-    
+    //Get Contact Data
+    this.createGrid()
     this.contactsService.currentContacts.subscribe(data => {
-      this.contacts = data;
+      this.rowData = this.populateRows(data);
     });
-    console.log(this.contacts);
+  }
+
+  createGrid(){
     this.gridOptions = <GridOptions>{
       columnDefs: [
         {headerName: 'Name', field: 'name', suppressMovable: true },
         {headerName: 'Phone', field: 'phone', suppressMovable: true  },
         {headerName: 'Email', field: 'email', suppressMovable: true  }
       ],
-      rowHeight: 48,
-      rowData: this.populateRows(this.contacts),
-      onGridReady: () => {
-        console.log(this.gridOptions.rowData);
+      rowData: this.rowData,
+      onGridReady: function (GridReadyEvent) {
+
+      },
+      onCellClicked: function (CellClickedEvent) {
+        var rows = CellClickedEvent.api.getSelectedRows();
+        console.log(rows[0].id);
       }
     }
   }
 
   //Populate Rows with Contacts
   populateRows(data: Contact[]): agRow[] {
-    console.log(data);
     var rowData = new Array<agRow>(data.length);
-    console.log(data.length);
     var index: number = 0;
     var namefl: string;
     for(let contact of data){
       namefl = contact.firstName.concat(" ").concat(contact.lastName);
-      rowData[index] = {name: namefl, phone: contact.phone, email: contact.email};
+      rowData[index] = {name: namefl, phone: contact.phone, email: contact.email, id: contact._id};
       index = index+1;
-      console.log(rowData);
     }
-    console.log(rowData);
-    return rowData as agRow[];
+    return rowData;
   }
 
   /*
   updateRowSelection(CellClickedEvent) {
 
   }*/
-
   
 
   //Do on page initialization
   ngOnInit(){
-
+ 
   }
 
 }

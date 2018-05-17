@@ -4,10 +4,12 @@
             <mat-card>
 
             <mat-card-content>
-                <ag-grid-angular (rowClicked)="onCellClicked($event)" id="myGrid"
+                <ag-grid-angular (cellClicked)="onCellClicked" id="myGrid"
                 style="height: 500px"
                 class="ag-theme-balham"
                 [gridOptions]="gridOptions"
+                [columnDefs]="columnDefs"
+                [rowData]="rowData"
                 [suppressHorizontalScroll]="true"
                 [enableSorting]="false"
                 [enableFilter]="false"
