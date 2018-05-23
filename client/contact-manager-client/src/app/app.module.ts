@@ -12,17 +12,20 @@ import {MatCardModule} from '@angular/material/card';
 import {CreateContact} from './createcontact.dialog.component'
 import {RemoveContact} from './removecontact.dialog.component'
 import {MatListModule} from '@angular/material/list';
+import {EditContact} from './editcontact.dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DialogComponent,
     CreateContact,
-    RemoveContact
+    RemoveContact,
+    EditContact
   ],
   entryComponents: [
     CreateContact,
-    RemoveContact
+    RemoveContact,
+    EditContact
   ],
   imports: [
     AgGridModule.withComponents([]),

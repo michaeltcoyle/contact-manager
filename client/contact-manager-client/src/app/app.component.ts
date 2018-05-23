@@ -63,8 +63,10 @@ export class AppComponent implements OnInit{
     var index: number = 0;
     var namefl: string;
     for(let contact of data){
+      if (contact != null || contact.firstName != null || contact.lastName != null){
       namefl = contact.firstName.concat(" ").concat(contact.lastName);
-      rowData[index] = {name: namefl, phone: contact.phone, email: contact.email, id: contact._id};
+      }
+      rowData[index] = {firstName: contact.firstName, lastName: contact.lastName, name: namefl, phone: contact.phone, email: contact.email, id: contact._id};
       index = index+1;
     }
     return rowData;

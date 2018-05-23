@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material';
 import {ContactsService} from './contacts.service';
 import {CreateContact} from './createcontact.dialog.component';
 import {RemoveContact} from './removecontact.dialog.component';
+import {EditContact} from './editcontact.dialog.component';
 
 
 @Component({
@@ -17,7 +18,6 @@ import {RemoveContact} from './removecontact.dialog.component';
 
 export class DialogComponent {
   
-
   constructor(public dialog: MatDialog) {}
 
   createContact(): void {
@@ -29,6 +29,12 @@ export class DialogComponent {
   removeContact(): void {
     this.dialog.closeAll(); 
     let dialogRef = this.dialog.open(RemoveContact, {
+      width: '600px'
+    });
+  }
+  editContact(): void {
+    this.dialog.closeAll(); 
+    let dialogRef = this.dialog.open(EditContact, {
       width: '600px'
     });
   }

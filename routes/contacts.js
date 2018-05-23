@@ -65,6 +65,8 @@ router.delete('/contact/:id', function(req, res, next){
 //edit contact
 router.put('/contact/:id', function(req, res, next){
     var contact = req.body;
+    console.log(contact.firstName);
+    console.log(contact.lastName);
     var updContact = {};
 
     if (contact.firstName){
@@ -82,7 +84,7 @@ router.put('/contact/:id', function(req, res, next){
     if (contact.phone){
         updContact = contact.phone;
     }
-
+    
     if (!updContact){
         res.status(400);
         res.json({

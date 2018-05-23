@@ -25,8 +25,8 @@ import {DialogComponent} from './dialog.component';
       this.dialogRef.close();
     }
     saveContact(): void{
-      if (!this.firstName && !this.lastName){
-        console.log("must enter a first or last name!");
+      if (!this.firstName || !this.lastName){
+        console.log("must enter a first and last name!");
         this.dialogRef.close();
         return;
       }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpHandler, HttpResponse} from '@angular/common/http';
 import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { map } from "rxjs/operators";
@@ -68,6 +68,18 @@ export class ContactsService{
                 this.contacts.next(data);
             })
         })
+    }
 
+    editContact(firstName: string, lastName: string, phone: string, email: string, id: string) {
+        var newContact = new LocalContact(firstName, lastName, email, phone);
+        newContact._id = id;
+        console.log(newContact._id);
+        console.log(JSON.stringify(newContact));
+        this.http.put(this.apiUrl+'contact/'+id, JSON.stringify(newContact), this.httpOptions)
+        .subscribe(() => {
+            this.updateContacts().subscribe(data => {
+                this.contacts.next(data);
+            })
+        })
     }
 }
