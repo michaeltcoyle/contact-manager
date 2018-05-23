@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from "rxjs/operators";
 import { Grid, ColumnApi, GridApi, GridOptions, GridReadyEvent} from "ag-grid";
+import { FunctionCall } from '@angular/compiler';
 
 
 @Component({
@@ -19,13 +20,12 @@ import { Grid, ColumnApi, GridApi, GridOptions, GridReadyEvent} from "ag-grid";
 export class AppComponent implements OnInit{
 
   //Initialize Fields
-  myGrid: Grid;
-  selectedRow: agRow;
-  rowData: agRow[];
-  title = 'app';
+  private myGrid: Grid;
+  private selectedContact: string;
+  private rowData: agRow[];
+  private title = 'app';
   //Create Table Headers
-
-  gridOptions: GridOptions;
+  private gridOptions: GridOptions;
 
   // let the grid know which columns and what data to use
 
@@ -33,13 +33,14 @@ export class AppComponent implements OnInit{
 
   constructor(private contactsService: ContactsService) {
     //Get Contact Data
-    this.createGrid()
     this.contactsService.currentContacts.subscribe(data => {
       this.rowData = this.populateRows(data);
     });
+    this.createGrid(this.contactsService)
   }
 
-  createGrid(){
+  createGrid(contactsService: ContactsService){
+    
     this.gridOptions = <GridOptions>{
       columnDefs: [
         {headerName: 'Name', field: 'name', suppressMovable: true },
@@ -50,9 +51,8 @@ export class AppComponent implements OnInit{
       onGridReady: function (GridReadyEvent) {
 
       },
-      onCellClicked: function (CellClickedEvent) {
-        var rows = CellClickedEvent.api.getSelectedRows();
-        console.log(rows[0].id);
+      onRowClicked: function (ev) {
+        return contactsService.setSelectionRow(ev.data);
       }
     }
   }
@@ -70,10 +70,10 @@ export class AppComponent implements OnInit{
     return rowData;
   }
 
-  /*
-  updateRowSelection(CellClickedEvent) {
-
-  }*/
+  
+  updateSelectionId(row: agRow) {
+    this.contactsService.setSelectionRow(row);
+  }
   
 
   //Do on page initialization

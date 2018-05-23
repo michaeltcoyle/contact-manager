@@ -4,6 +4,7 @@ import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { map } from "rxjs/operators";
 import { Contact } from "./contact.model";
 import { Grid } from "ag-grid";
+import { agRow } from "./agRow.model"
 
 
 export class LocalContact implements Contact {
@@ -15,6 +16,7 @@ export class LocalContact implements Contact {
 @Injectable()
 export class ContactsService{
     contacts = new BehaviorSubject<Contact[]>(new Array());
+    private selectionRow: agRow;
     currentContacts = this.contacts.asObservable();
     myGrid: Grid;
     constructor(private http: HttpClient) {
@@ -35,6 +37,15 @@ export class ContactsService{
         return this.currentContacts;
     }
 
+    setSelectionRow(row: agRow) {
+        this.selectionRow = row;
+        console.log(row);
+    }
+
+    getSelectionRow() {
+        return this.selectionRow;
+    }
+
     private updateContacts(): Observable<Contact[]> {
         return this.http.get(this.apiUrl+'contacts') as Observable<Contact[]>;
     }
@@ -47,5 +58,16 @@ export class ContactsService{
                 this.contacts.next(data);
             })
         })
+    }
+
+    deleteContact() {
+        console.log("route: "+this.apiUrl+'contact/'+this.selectionRow.id);
+        this.http.delete(this.apiUrl+'contact/'+this.selectionRow.id)
+        .subscribe(() => {
+            this.updateContacts().subscribe(data => {
+                this.contacts.next(data);
+            })
+        })
+
     }
 }

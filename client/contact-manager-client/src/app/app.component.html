@@ -4,15 +4,17 @@
             <mat-card>
 
             <mat-card-content>
-                <ag-grid-angular (cellClicked)="onCellClicked" id="myGrid"
+                <ag-grid-angular (rowClicked)="onRowClicked" id="myGrid"
                 style="height: 500px"
                 class="ag-theme-balham"
                 [gridOptions]="gridOptions"
                 [columnDefs]="columnDefs"
                 [rowData]="rowData"
+                [rowSelection]="single"
                 [suppressHorizontalScroll]="true"
                 [enableSorting]="false"
                 [enableFilter]="false"
+                [suppressCellSelection]="true"
                 >
                 </ag-grid-angular>
 
