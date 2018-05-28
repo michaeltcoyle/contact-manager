@@ -61,7 +61,6 @@ export class ContactsService{
     }
 
     deleteContact() {
-        console.log("route: "+this.apiUrl+'contact/'+this.selectionRow.id);
         this.http.delete(this.apiUrl+'contact/'+this.selectionRow.id)
         .subscribe(() => {
             this.updateContacts().subscribe(data => {
@@ -71,11 +70,8 @@ export class ContactsService{
     }
 
     editContact(firstName: string, lastName: string, phone: string, email: string, id: string) {
-        var newContact = new LocalContact(firstName, lastName, email, phone);
-        newContact._id = id;
-        console.log(newContact._id);
-        console.log(JSON.stringify(newContact));
-        this.http.put(this.apiUrl+'contact/'+id, JSON.stringify(newContact), this.httpOptions)
+        var updContact = {"firstName": firstName, "lastName": lastName, "phone": phone, "email": email};
+        this.http.put(this.apiUrl+'contact/'+id, updContact)
         .subscribe(() => {
             this.updateContacts().subscribe(data => {
                 this.contacts.next(data);

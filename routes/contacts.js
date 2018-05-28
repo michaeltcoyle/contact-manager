@@ -65,24 +65,22 @@ router.delete('/contact/:id', function(req, res, next){
 //edit contact
 router.put('/contact/:id', function(req, res, next){
     var contact = req.body;
-    console.log(contact.firstName);
-    console.log(contact.lastName);
     var updContact = {};
 
     if (contact.firstName){
-        updContact = contact.firstName;
+        updContact.firstName = contact.firstName;
     }
 
     if (contact.lastName){
-        updContact = contact.lastName;
+        updContact.lastName = contact.lastName;
     }
 
     if (contact.email){
-        updContact = contact.email;
+        updContact.email = contact.email;
     }
 
     if (contact.phone){
-        updContact = contact.phone;
+        updContact.phone = contact.phone;
     }
     
     if (!updContact){
